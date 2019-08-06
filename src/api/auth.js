@@ -1,12 +1,15 @@
-import express from "./node_modules/express";
-import { spel } from "../constants/routes";
+import express from "express";
+import Routes from "../constants/routes";
+import { registerUser, verifyUser, login } from "../middlewares/auth";
 
 const api = express.Router();
 
-api.post(spel.social_auth)
+// api.post(spel.social_auth)
 
-api.post(spel.signin)
+api.post(Routes.spel.auth.signin, login);
 
-api.post(spel.signup)
+api.post(Routes.spel.auth.signup, registerUser);
+
+api.put(Routes.spel.auth.verify, verifyUser);
 
 export default api;
