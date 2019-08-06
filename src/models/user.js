@@ -20,9 +20,13 @@ const userSchema = Schema({
         required: true
     },
     isVerified: {
+        type: Boolean,
+        default: false
+    },
+    avatar: {
         type: String,
-        required: true
+        default: false
     }
 })
 
-export default mongoose.model("SpelUser", userSchema);
+export default mongoose.model("User", userSchema);

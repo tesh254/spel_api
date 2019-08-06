@@ -10,6 +10,10 @@ import dotenv from "dotenv"
 import requestIP from "request-ip"
 
 import config from "./config"
+import Routes from "./constants/routes"
+
+// API Endpoints
+import authAPI from "./api/auth";
 
 const app = express()
 
@@ -46,7 +50,7 @@ app.use(cors())
 app.use(compression())
 
 // API endpoints
-// app.use("/", socialAuth)
+app.use(Routes.spel.root, authAPI);
 
 // set the port
 app.set("port", process.env.PORT || 3040)

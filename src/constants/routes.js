@@ -4,7 +4,8 @@ export default {
     auth: {
       signin: "/in",
       signup: "/join",
-      social_auth: "/auth"
+      social_auth: "/auth",
+      verify: "/email-verify"
     }
   }
 };
