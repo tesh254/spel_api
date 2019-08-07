@@ -14,9 +14,7 @@ const transporter = nodemailer.createTransport({
 });
 
 const sendMail = data => {
-  let link = `${data.domain}/spel/v1/email-verify?token=${jwtSignature(
-    data.toMail
-  )}`;
+  let link = `${config.ui}/email-verify/${jwtSignature(data.toMail)}`;
 
   let mailOptions = {
     from: config.mail.email,

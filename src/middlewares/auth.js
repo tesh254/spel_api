@@ -4,6 +4,7 @@ import Messages from "../constants/messages";
 export const registerUser = (req, res, next) => {
   const domain = req.protocol + "://" + req.get("host");
   req.body.domain = domain;
+  req.body.username = req.body.username.toLowerCase();
   createUser(req.body)
     .then(response =>
       res.status(201).json({
@@ -18,7 +19,7 @@ export const registerUser = (req, res, next) => {
 };
 
 export const verifyUser = (req, res, next) => {
-  const token = req.query.token
+  const token = req.params.token
   verifyEmail(token)
     .then(response => res.status(201).json({
       message: Messages.userVerification,

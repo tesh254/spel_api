@@ -5,7 +5,14 @@ export default {
       signin: "/in",
       signup: "/join",
       social_auth: "/auth",
-      verify: "/email-verify"
+      verify: "/email-verify/:token"
+    },
+    profile: {
+      get: "/user/:username",
+      update: "/profile",
+      create: "/profile",
+      all: "/users",
+      by_email: "/user/:email"
     }
   }
 };

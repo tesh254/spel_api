@@ -14,20 +14,20 @@ export const jwtVerify = token => {
   try {
     return jwt.verify(token, config.secretkey, (err, decoded) => {
       if (err) {
-        return {
+        throw {
           error: err.name,
-          message: `${err.message} kindly resend reactivation key`,
-          status: "failed"
+          message: `Invalid token kindly, try again later`,
+          status: 400
         };
       } else {
         return decoded.data;
       }
     });
   } catch (err) {
-    return {
+    throw {
       error: err.name,
       message: err.message,
-      status: "failed"
+      status: 400
     };
   }
 };
