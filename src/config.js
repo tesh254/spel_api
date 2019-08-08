@@ -14,7 +14,8 @@ const configuration = {
     email: process.env.ZOHO_EMAIL,
     password: process.env.ZOHO_PASSWORD
   },
-  protocol: process.env.PROTOCOL
+  protocol: process.env.PROTOCOL,
+  ui: process.env.FRONTEND_URL
 };
 
 export default configuration;

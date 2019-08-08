@@ -14,6 +14,7 @@ import Routes from "./constants/routes"
 
 // API Endpoints
 import authAPI from "./api/auth";
+import profileAPI from "./api/profile";
 
 const app = express()
 
@@ -51,6 +52,7 @@ app.use(compression())
 
 // API endpoints
 app.use(Routes.spel.root, authAPI);
+app.use(Routes.spel.root, profileAPI);
 
 // set the port
 app.set("port", process.env.PORT || 3040)
