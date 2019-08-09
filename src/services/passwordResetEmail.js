@@ -1,4 +1,4 @@
-const verifyEmail = (username, email, link) => `
+const emailTemplate = (username, email, link) => `
 <!DOCTYPE html>
 <html>
 
@@ -6,7 +6,7 @@ const verifyEmail = (username, email, link) => `
 
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Email Verification</title>
+    <title>Password Reset</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style type="text/css">
         /**
@@ -123,8 +123,8 @@ const verifyEmail = (username, email, link) => `
                     </tr>
                     <tr>
                         <td align="middle" bgcolor="#ffffff" style="padding: 36px 24px 0; font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif;">
-                            <img src="https://res.cloudinary.com/duoxba7n1/image/upload/v1565267988/spel_welcome.png" alt="" style="border-radius: 50%; width: 45%;">
-                            <h3 style="margin: 0; font-size: 32px; font-weight: 700; letter-spacing: -1px; line-height: 48px;">Verify Email
+                            <img src="https://res.cloudinary.com/duoxba7n1/image/upload/v1565267988/spel_welcome.png" alt="" style="width: 45%;">
+                            <h3 style="margin: 0; font-size: 32px; font-weight: 700; letter-spacing: -1px; line-height: 48px;">Password Reset
                             </h3>
                         </td>
                     </tr>
@@ -144,7 +144,7 @@ const verifyEmail = (username, email, link) => `
 
                             <p style="margin: 0;">Hi there ${username},
                               <br/>
-                              Verify your account by clicking the link below
+                              Proceed to reseting your account password by clicking the button below
                             </p>
                         </td>
                     </tr>
@@ -160,7 +160,7 @@ const verifyEmail = (username, email, link) => `
                                             <tr>
                                                 <td align="center" bgcolor="#1a82e2" style="border-radius: 6px;">
                                                     <a href="${link}" target="_blank" style="display: inline-block; padding: 16px 36px; font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 16px; color: #ffffff; text-decoration: none; border-radius: 6px;">
-                                                      Verify Email</a>
+                                                      Reset Link</a>
                                                 </td>
                                             </tr>
                                         </table>
@@ -202,8 +202,7 @@ const verifyEmail = (username, email, link) => `
                     <!-- start permission -->
                     <tr>
                         <td align="center" bgcolor="#e9ecef" style="padding: 12px 24px; font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 14px; line-height: 20px; color: #666;">
-                            <p style="margin: 0;">You received this email because you need to
-                                verify your account.</p>
+                            <p style="margin: 0;">You received this email because you want to reset your password.</p>
                         </td>
                     </tr>
                     <!-- end permission -->
@@ -222,4 +221,4 @@ const verifyEmail = (username, email, link) => `
 
 `;
 
-export default verifyEmail;
+export default emailTemplate;
