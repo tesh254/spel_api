@@ -5,7 +5,9 @@ export default {
       signin: "/in",
       signup: "/join",
       social_auth: "/auth",
-      verify: "/email-verify/:token"
+      verify: "/email-verify/:token",
+      password_reset: "/password-reset/:token",
+      password_reset_email_endpoint: "/password-reset/email"
     },
     profile: {
       get: "/user/:username",

@@ -2,7 +2,7 @@ import bcrypt from "bcrypt";
 import valid from "validator";
 
 import User from "../models/user";
-import sendMail from "../services/email";
+import sendMail, { passResetMail } from "../services/email";
 import { jwtVerify, refreshToken, loginJwt } from "../services/jwt";
 import Messages from "../constants/messages";
 
@@ -117,6 +117,78 @@ export const loginUser = async userParam => {
       throw {
         status: 404,
         message: "Invalid email/password"
+      };
+    }
+  }
+};
+
+export const sendResetEmail = async data => {
+  if (!valid.isEmail(data.email) && valid.isEmpty(data.email)) {
+    throw {
+      status: 400,
+      message: Messages.invalidEmail
+    };
+  } else {
+    const user = await User.findOne({ email: data.email });
+    if (!user) {
+      throw {
+        status: 404,
+        message: Messages.userNotFound
+      };
+    } else {
+      await passResetMail({
+        toMail: data.email,
+        subject: "Password Reset",
+        body: "Password Reset",
+        username: user.username
+      });
+      return {
+        message: Messages.resetLink
+      };
+    }
+  }
+};
+
+export const handlePasswordReset = async data => {
+  const email = jwtVerify(data.token);
+  const user = await User.findOne(
+    { email: email },
+    {
+      username: -1,
+      email: -1,
+      name: -1,
+      avatar: -1
+    }
+  );
+
+  if (!user) {
+    throw {
+      status: 404,
+      message: Messages.userNotFound
+    };
+  } else {
+    if (data.password !== data.confirm) {
+      throw {
+        status: 400,
+        message: "Passwords do not match"
+      };
+    } else if (data.password.length < 6) {
+      throw {
+        status: 400,
+        message: "Password should be above 6 characters"
+      };
+    } else {
+      const hashedPassword = bcrypt.hashSync(data.password, 10);
+
+      Object.assign(user, {
+        password: hashedPassword
+      });
+
+      await user.save();
+
+      return {
+        user,
+        message: Messages.passwordChange
       };
     }
   }
